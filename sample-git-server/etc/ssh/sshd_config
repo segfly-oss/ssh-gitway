@@ -1,0 +1,6 @@
+AuthorizedKeysFile .ssh/authorized_keys
+AuthenticationMethods publickey
+PasswordAuthentication no
+UsePrivilegeSeparation no
+PidFile /home/git/sshd.pid
+Port 2022

@@ -1,0 +1,28 @@
+ssh-gitway:
+  image: segfly/ssh-gitway
+  cap_drop:
+  - ALL
+  cap_add:
+  - SYS_CHROOT
+  - SETGID
+  - SETUID
+  - CHOWN
+  volumes:
+  - gitway-ssh:/etc/ssh
+  environment:
+    TARGET_SSH_PORT: 2022
+  ports:
+    - '22:22'
+  links:
+    - sample-git1:team1
+    - sample-git2:team2
+
+sample-git1:
+  image: segfly/ssh-gitway:sample-git-server
+  environment:
+    AUTHORIZED_KEYS: 'paste your pubkey here'
+
+sample-git2:
+  image: segfly/ssh-gitway:sample-git-server
+  environment:
+    AUTHORIZED_KEYS: 'paste your pubkey here'

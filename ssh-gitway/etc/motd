@@ -1,0 +1,12 @@
+Howdy!
+You've reached SSH GitWay - a routing ssh-git gateway.
+
+SSH GitWay does not provide shell access. So you might want to try something like the following instead:
+
+  git clone "ext::ssh -A your-team@gitway-host %S /username/your-repo.git"
+
+The above will vary depending on SSH GitWay's configuration.
+If you need further assistance, please contact your system administrator.
+
+For more information on SSH GitWay, please visit:
+https://github.com/segfly-oss/ssh-gitway

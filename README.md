@@ -70,13 +70,22 @@ At a high-level, the SSH-GitWay container has the following:
 * Regular terminal access is prohibited
 * SSHD is started as root, because it is more secure than allowing a non-privileged user in the container possible access to the host keys
 
+# How to Build
+This project uses Rocker[5] because it's pretty awesome. If you use the Segfly containerized version of Rocker[6], the build command is simply:
+
+```bash
+rocker build -f ssh-gitway/Dockerfile
+```
+
 # Known Issues
 * Client without the ability to perform ssh-agent key forwarding are probably not going to work
 * SSH-GitWay has the potential to be a general-purpose SSH solution, not just for Git and wil be a focus in a future version. Right now it is hard-coded for the `git` user on targets.
 
 # References
 
-[1] http://dag.wiee.rs/howto/ssh-http-tunneling/<br/>
-[2] https://git-scm.com/docs/git-remote-ext<br/>
-[3] https://stribika.github.io/2015/01/04/secure-secure-shell.html<br/>
-[4] https://linux-audit.com/finding-setuid-binaries-on-linux-and-bsd/<br/>
+* [1] http://dag.wiee.rs/howto/ssh-http-tunneling/
+* [2] https://git-scm.com/docs/git-remote-ext
+* [3] https://stribika.github.io/2015/01/04/secure-secure-shell.html
+* [4] https://linux-audit.com/finding-setuid-binaries-on-linux-and-bsd/
+* [5] https://github.com/grammarly/rocker
+* [6] https://github.com/segfly-oss/rocker

@@ -12,7 +12,7 @@ ssh-gitway:
   environment:
     TARGET_SSH_PORT: 2022
   ports:
-    - '22:22'
+    - '22:2022'
   links:
     - sample-git1:team1
     - sample-git2:team2

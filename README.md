@@ -68,6 +68,8 @@ At a high-level, the SSH-GitWay container has the following:
 
 **Some of the Icing:**
 * Regular terminal access is prohibited
+* A volume mounted at `/etc/ssh` will enable persistent host-keys for the SSH GitWay server
+* Setting `TARGET_SSH_PORT` will control the target destination port of SSH GitWay allowing non-root target containers
 * SSHD is started as root, because it is more secure than allowing a non-privileged user in the container possible access to the host keys
 
 # How to Build
@@ -79,7 +81,7 @@ rocker build -f ssh-gitway/Dockerfile
 
 # Known Issues
 * Client without the ability to perform ssh-agent key forwarding are probably not going to work
-* SSH-GitWay has the potential to be a general-purpose SSH solution, not just for Git and wil be a focus in a future version. Right now it is hard-coded for the `git` user on targets.
+* SSH-GitWay has the potential to be a general-purpose SSH solution, not just for Git and will be a focus in a future version. Right now it is hard-coded for the `git` user on targets.
 
 # References
 

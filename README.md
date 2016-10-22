@@ -81,7 +81,6 @@ rocker build -f ssh-gitway/Dockerfile
 
 # Known Issues
 * Client without the ability to perform ssh-agent key forwarding are probably not going to work
-* SSH-GitWay has the potential to be a general-purpose SSH solution, not just for Git and will be a focus in a future version. Right now it is hard-coded for the `git` user on targets.
 
 # References
 

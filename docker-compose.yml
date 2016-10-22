@@ -10,7 +10,8 @@ ssh-gitway:
   volumes:
   - gitway-ssh:/etc/ssh
   environment:
-    TARGET_SSH_PORT: 2022
+    TARGET_SSH_PORT: 2022 # Default 2022
+    FORCE_GIT_USER: 0 # Default TRUE (1), all other values besides zero are interprted as TRUE
   ports:
     - '22:2022'
   links:

@@ -22,4 +22,4 @@ UsePAM yes
 AuthenticationMethods keyboard-interactive:pam
 PasswordAuthentication no
 AllowAgentForwarding yes
-ForceCommand . /etc/entrypoint/rc && ${SSH_ORIGINAL_COMMAND:-cat /etc/motd} || ssh -q -t -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -p ${TARGET_SSH_PORT:-22} "git@${USER}" "${SSH_ORIGINAL_COMMAND}"
+ForceCommand /etc/entrypoint/forcecmd.sh

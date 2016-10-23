@@ -1,0 +1,38 @@
+machine:
+  services:
+    - docker
+
+dependencies:
+  cache_directories:
+    - ~/.docker_images
+    - ~/.rocker_cache
+  pre:
+    - docker info
+    - if [[ -e ~/.docker_images/all.tar ]]; then docker load -i ~/.docker_images/all.tar; fi
+    - if [[ -e ~/.docker_images/tagged.tar ]]; then docker load -i ~/.docker_images/tagged.tar; fi
+    - docker images
+  override:
+    - ./build.sh
+  post:
+    - mkdir -p ~/.docker_images; docker images -aq | xargs docker save -o ~/.docker_images/all.tar
+    - mkdir -p ~/.docker_images; docker images | grep -o '^\S*' | grep -v none | tail -n +2 | xargs docker save -o ~/.docker_images/tagged.tar
+
+test:
+  override:
+    - echo "Skipping tests"
+
+deployment:
+  latest:
+    branch: master
+    owner: segfly-oss
+    commands:
+      - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+      - docker push segfly/ssh-gitway:latest
+      - docker push segfly/ssh-gitway:sample-git-server
+  release:
+    tag: /[0-9]+(\.[0-9]+)(\.[0-9]+)(\.[0-9]+[a-z]+)/
+    owner: segfly-oss
+    commands:
+      - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+      - docker tag segfly/ssh-gitway:latest segfly/ssh-gitway:${CIRCLE_TAG}
+      - docker segfly/ssh-gitway:${CIRCLE_TAG}
